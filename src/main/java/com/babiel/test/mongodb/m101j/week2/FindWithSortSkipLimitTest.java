@@ -30,7 +30,7 @@ public class FindWithSortSkipLimitTest {
     }
 
     Bson projection = fields(include("i", "j"), excludeId());
-    Bson sort = new Document("i", 1);
+    Bson sort = new Document("i", 1).append("j", 1);
 
     List<Document> all = collection.find()
         .projection(projection)
