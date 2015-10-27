@@ -9,6 +9,7 @@ import org.bson.BsonDocument;
 import org.bson.Document;
 
 import static com.babiel.test.mongodb.m101j.util.Helpers.printJson;
+import static java.util.Arrays.asList;
 
 public class InsertTest {
   public static void main( String[] args )
@@ -23,10 +24,16 @@ public class InsertTest {
         .append("age", 30)
         .append("profession", "programmer");
 
-    printJson(smith);
+    Document jones = new Document("name", "Jones")
+        .append("age", 25)
+        .append("profession", "programmer");
 
-    coll.insertOne(smith);
+    printJson(smith);
+    printJson(jones);
+
+    coll.insertMany(asList(smith, jones));
 
     printJson(smith);
+    printJson(jones);
   }
 }
