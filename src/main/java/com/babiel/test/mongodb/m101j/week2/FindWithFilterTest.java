@@ -5,6 +5,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,13 +28,15 @@ public class FindWithFilterTest {
           .append("y", new Random().nextInt(100)));
     }
 
-    List<Document> all = collection.find().into(new ArrayList<Document>());
+    Bson filter = new Document("x", 0);
+
+    List<Document> all = collection.find(filter).into(new ArrayList<Document>());
 
     for (Document cur : all) {
       printJson(cur);
     }
 
-    long count = collection.count();
+    long count = collection.count(filter);
     System.out.println();
     System.out.println(count);
   }
