@@ -3,6 +3,7 @@ package com.babiel.test.mongodb.m101j.week2;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.UpdateOptions;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
@@ -31,7 +32,8 @@ public class UpdateTest {
 //    collection.replaceOne(eq("x", 5), new Document("_id", 5).append("x", 20)
 //        .append("update", true));
 
-    collection.updateOne(eq("x", 5), new Document("$set", new Document("x", 20)));
+    collection.updateOne(eq("_id", 9), new Document("$set", new Document("x", 20)),
+        new UpdateOptions().upsert(true));
 
     for (Document cur : collection.find().into(new ArrayList<Document>())) {
       printJson(cur, false);
