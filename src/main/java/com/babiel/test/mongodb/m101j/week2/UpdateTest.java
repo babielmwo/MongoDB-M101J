@@ -5,7 +5,6 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.bson.conversions.Bson;
-import org.jcp.xml.dsig.internal.dom.DOMKeyInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +28,10 @@ public class UpdateTest {
           .append("x", i));
     }
 
-    collection.replaceOne(eq("x", 5), new Document("_id", 5).append("x", 20)
-        .append("update", true));
+//    collection.replaceOne(eq("x", 5), new Document("_id", 5).append("x", 20)
+//        .append("update", true));
+
+    collection.updateOne(eq("x", 5), new Document("$set", new Document("x", 20)));
 
     for (Document cur : collection.find().into(new ArrayList<Document>())) {
       printJson(cur, false);
