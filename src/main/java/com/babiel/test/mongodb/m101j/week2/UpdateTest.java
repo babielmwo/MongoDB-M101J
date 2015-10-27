@@ -33,7 +33,7 @@ public class UpdateTest {
 //        .append("update", true));
 
     collection.updateOne(eq("_id", 9), new Document("$set", new Document("x", 20)),
-        new UpdateOptions().upsert(true));
+        new UpdateOptions().upsert(false)); //no doc created, no doc matches _id=9
 
     for (Document cur : collection.find().into(new ArrayList<Document>())) {
       printJson(cur, false);
