@@ -3,6 +3,7 @@ package com.babiel.test.mongodb.m101j.week2;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Projections;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
@@ -31,7 +32,7 @@ public class FindWithProjectionTest {
 
     Bson filter = and(eq("x", 0), gt("y", 10), lt("y", 90));
 
-    Bson projection = new Document("x", 1).append("i", 1).append("_id", 0);
+    Bson projection = Projections.exclude("x", "_id");
 
     List<Document> all = collection.find(filter)
         .projection(projection)
