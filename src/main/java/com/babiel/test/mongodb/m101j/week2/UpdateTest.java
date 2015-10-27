@@ -12,6 +12,8 @@ import java.util.List;
 
 import static com.babiel.test.mongodb.m101j.util.Helpers.printJson;
 import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.gt;
+import static com.mongodb.client.model.Filters.gte;
 import static com.mongodb.client.model.Projections.*;
 import static com.mongodb.client.model.Sorts.descending;
 
@@ -32,8 +34,10 @@ public class UpdateTest {
 //    collection.replaceOne(eq("x", 5), new Document("_id", 5).append("x", 20)
 //        .append("update", true));
 
-    collection.updateOne(eq("_id", 9), new Document("$set", new Document("x", 20)),
-        new UpdateOptions().upsert(false)); //no doc created, no doc matches _id=9
+//    collection.updateOne(eq("_id", 9), new Document("$set", new Document("x", 20)),
+//        new UpdateOptions().upsert(true));
+
+    collection.updateMany(gte("_id", 5), new Document("$inc", new Document("x", 1)));
 
     for (Document cur : collection.find().into(new ArrayList<Document>())) {
       printJson(cur, false);
