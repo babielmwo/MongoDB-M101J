@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Random;
 
 import static com.babiel.test.mongodb.m101j.util.Helpers.printJson;
-import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.*;
 
 public class FindWithFilterTest {
   public static void main(String[] args) {
@@ -33,7 +33,7 @@ public class FindWithFilterTest {
 //    Bson filter = new Document("x", 0)   //to see in mongod console log:  mongod -vv
 //        .append("y", new Document("$gt", 10).append("$lt", 90));
 
-    Bson filter = eq("x",0);
+    Bson filter = and(eq("x", 0), gt ("y", 10),lt("y", 90));
 
     List<Document> all = collection.find(filter).into(new ArrayList<Document>());
 
