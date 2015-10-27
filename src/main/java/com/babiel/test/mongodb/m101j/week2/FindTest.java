@@ -15,7 +15,7 @@ public class FindTest {
   public static void main(String[] args) {
     MongoClient client = new MongoClient();
     MongoDatabase db = client.getDatabase("course");
-    MongoCollection<Document> collection = db.getCollection("insertTest");
+    MongoCollection<Document> collection = db.getCollection("findTest");
 
     collection.drop();
 
