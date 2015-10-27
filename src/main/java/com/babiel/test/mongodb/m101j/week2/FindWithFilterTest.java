@@ -4,6 +4,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Random;
 
 import static com.babiel.test.mongodb.m101j.util.Helpers.printJson;
+import static com.mongodb.client.model.Filters.eq;
 
 public class FindWithFilterTest {
   public static void main(String[] args) {
@@ -28,8 +30,10 @@ public class FindWithFilterTest {
           .append("y", new Random().nextInt(100)));
     }
 
-    Bson filter = new Document("x", 0)   //to see in mongod console log:  mongod -vv
-        .append("y", new Document("$gt", 10).append("$lt", 90));
+//    Bson filter = new Document("x", 0)   //to see in mongod console log:  mongod -vv
+//        .append("y", new Document("$gt", 10).append("$lt", 90));
+
+    Bson filter = eq("x",0);
 
     List<Document> all = collection.find(filter).into(new ArrayList<Document>());
 
