@@ -31,7 +31,7 @@ public class FindWithProjectionTest {
 
     Bson filter = and(eq("x", 0), gt("y", 10), lt("y", 90));
 
-    Bson projection = new Document("x", 1).append("i", 1);
+    Bson projection = new Document("x", 1).append("i", 1).append("_id", 0);
 
     List<Document> all = collection.find(filter)
         .projection(projection)
