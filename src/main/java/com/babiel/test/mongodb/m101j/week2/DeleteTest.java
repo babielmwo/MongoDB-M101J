@@ -25,7 +25,7 @@ public class DeleteTest {
       collection.insertOne(new Document().append("_id", i));
     }
 
-    collection.deleteMany(gt("_id", 4));
+    collection.deleteOne(gt("_id", 4));
 
     for (Document cur : collection.find().into(new ArrayList<Document>())) {
       printJson(cur, false);
