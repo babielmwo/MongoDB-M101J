@@ -38,6 +38,8 @@ public class FindWithSortSkipLimitTest {
     List<Document> all = collection.find()
         .projection(projection)
         .sort(sort)
+        .skip(20)
+        .limit(50)
         .into(new ArrayList<Document>());
 
     for (Document cur : all) {
