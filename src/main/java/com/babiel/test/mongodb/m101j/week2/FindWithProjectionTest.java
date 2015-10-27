@@ -36,7 +36,7 @@ public class FindWithProjectionTest {
     List<Document> all = collection.find(filter).into(new ArrayList<Document>());
 
     for (Document cur : all) {
-      printJson(cur);
+      printJson(cur, false);
     }
   }
 }
