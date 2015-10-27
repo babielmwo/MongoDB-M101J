@@ -1,5 +1,7 @@
 package com.babiel.test.mongodb.m101j;
 
+import org.bson.BsonDocument;
+import org.bson.BsonString;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -28,5 +30,7 @@ public class DocumentTest {
     int i = document.getInteger("int");
 
     printJson(document);
+
+    BsonDocument bsonDocument = new BsonDocument("str", new BsonString("MongoDB, Hello"));
   }
 }
