@@ -6,6 +6,8 @@ import org.bson.types.ObjectId;
 import java.util.Arrays;
 import java.util.Date;
 
+import static com.babiel.test.mongodb.m101j.util.Helpers.printJson;
+
 public class DocumentTest {
   public static void main( String[] args )
   {
@@ -24,5 +26,7 @@ public class DocumentTest {
     //String str = (String) document.get("str");
     String str = document.getString("str");
     int i = document.getInteger("int");
+
+    printJson(document);
   }
 }
