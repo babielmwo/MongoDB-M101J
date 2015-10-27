@@ -28,7 +28,7 @@ public class FindWithFilterTest {
           .append("y", new Random().nextInt(100)));
     }
 
-    Bson filter = new Document("x", 0);
+    Bson filter = new Document("x", 0);   //to see in mongod console log:  mongod -vv
 
     List<Document> all = collection.find(filter).into(new ArrayList<Document>());
 
