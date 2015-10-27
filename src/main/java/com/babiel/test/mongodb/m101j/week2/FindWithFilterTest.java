@@ -29,7 +29,7 @@ public class FindWithFilterTest {
     }
 
     Bson filter = new Document("x", 0)   //to see in mongod console log:  mongod -vv
-        .append("y", new Document("$gt", 10));
+        .append("y", new Document("$gt", 10).append("$lt", 90));
 
     List<Document> all = collection.find(filter).into(new ArrayList<Document>());
 
