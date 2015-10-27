@@ -13,6 +13,9 @@ import java.util.Random;
 
 import static com.babiel.test.mongodb.m101j.util.Helpers.printJson;
 import static com.mongodb.client.model.Filters.*;
+import static com.mongodb.client.model.Projections.excludeId;
+import static com.mongodb.client.model.Projections.fields;
+import static com.mongodb.client.model.Projections.include;
 
 public class FindWithProjectionTest {
   public static void main(String[] args) {
@@ -32,8 +35,7 @@ public class FindWithProjectionTest {
 
     Bson filter = and(eq("x", 0), gt("y", 10), lt("y", 90));
 
-    Bson projection = Projections.fields(Projections.include("y", "i"),
-        Projections.excludeId());
+    Bson projection = fields(include("y", "i"), excludeId());
 
     List<Document> all = collection.find(filter)
         .projection(projection)
