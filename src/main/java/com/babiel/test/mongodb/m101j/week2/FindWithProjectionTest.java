@@ -32,7 +32,8 @@ public class FindWithProjectionTest {
 
     Bson filter = and(eq("x", 0), gt("y", 10), lt("y", 90));
 
-    Bson projection = Projections.exclude("x", "_id");
+    Bson projection = Projections.fields(Projections.include("y", "i"),
+        Projections.exclude("_id"));
 
     List<Document> all = collection.find(filter)
         .projection(projection)
