@@ -13,6 +13,7 @@ import java.util.Random;
 import static com.babiel.test.mongodb.m101j.util.Helpers.printJson;
 import static com.mongodb.client.model.Filters.*;
 import static com.mongodb.client.model.Projections.*;
+import static com.mongodb.client.model.Sorts.ascending;
 
 public class FindWithSortSkipLimitTest {
   public static void main(String[] args) {
@@ -30,7 +31,7 @@ public class FindWithSortSkipLimitTest {
     }
 
     Bson projection = fields(include("i", "j"), excludeId());
-    Bson sort = new Document("i", 1).append("j", -1);
+    Bson sort = ascending("i");
 
     List<Document> all = collection.find()
         .projection(projection)
