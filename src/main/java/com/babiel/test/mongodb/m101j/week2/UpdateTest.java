@@ -25,7 +25,7 @@ public class UpdateTest {
 
     collection.drop();
 
-    //insert 100 documents with two random integers
+    //insert 8 documents, with _id set to the value if the loop variable
     for (int i = 0; i < 8; i++) {
       collection.insertOne(new Document().append("_id", i)
           .append("x", i));
