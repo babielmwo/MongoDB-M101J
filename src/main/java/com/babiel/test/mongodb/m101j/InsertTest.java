@@ -21,5 +21,6 @@ public class InsertTest {
         .append("age", 30)
         .append("profession", "programmer");
 
+    coll.insertOne(smith);
   }
 }
