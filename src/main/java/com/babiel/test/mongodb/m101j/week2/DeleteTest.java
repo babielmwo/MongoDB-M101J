@@ -9,6 +9,7 @@ import org.bson.conversions.Bson;
 import java.util.ArrayList;
 
 import static com.babiel.test.mongodb.m101j.util.Helpers.printJson;
+import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.gt;
 import static com.mongodb.client.model.Filters.gte;
 
@@ -25,7 +26,7 @@ public class DeleteTest {
       collection.insertOne(new Document().append("_id", i));
     }
 
-    collection.deleteOne(gt("_id", 4));
+    collection.deleteOne(eq("_id", 4));
 
     for (Document cur : collection.find().into(new ArrayList<Document>())) {
       printJson(cur, false);
