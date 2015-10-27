@@ -1,4 +1,4 @@
-package com.babiel.test.mongodb.m101j;
+package com.babiel.test.mongodb.m101j.week1;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;

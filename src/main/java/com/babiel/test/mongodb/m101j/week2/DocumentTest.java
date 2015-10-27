@@ -1,4 +1,4 @@
-package com.babiel.test.mongodb.m101j;
+package com.babiel.test.mongodb.m101j.week2;
 
 import org.bson.BsonDocument;
 import org.bson.BsonString;
