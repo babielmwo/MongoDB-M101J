@@ -11,11 +11,11 @@ import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HelloWorldSparkFreemarkerStype {
+public class HelloWorldSparkFreemarkerStyle {
   public static void main(String[] args) {
     final Configuration configuration = new Configuration();
     configuration.setClassForTemplateLoading(
-        HelloWorldSparkFreemarkerStype.class, "/");
+        HelloWorldSparkFreemarkerStyle.class, "/");
 
 
     Spark.get(new Route("/") {  //Homepage
