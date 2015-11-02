@@ -18,7 +18,7 @@ public class InsertTest {
     MongoDatabase db = client.getDatabase("course");
     MongoCollection<Document> coll = db.getCollection("insertTest");
 
-    coll.drop();;
+    coll.drop();
 
     Document smith = new Document("name", "Smith")
         .append("age", 30)
