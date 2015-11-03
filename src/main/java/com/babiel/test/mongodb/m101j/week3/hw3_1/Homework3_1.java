@@ -5,6 +5,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.bson.conversions.Bson;
+import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -47,21 +48,37 @@ public class Homework3_1 {
       printJson(student, DONT_INDENT);
       scores = (List<Document>) student.get("scores");
 
-      Double lowestScore = null;
+      Document lowestScore = null;
       for (Document score : scores) {
         Double scoreValue = score.getDouble("score");
         if (isHomework(score)) {
           printJson(score, INDENT);
           if (lowestScore == null) {
-            lowestScore = scoreValue;
+            lowestScore = score;
           } else {
-            if (scoreValue < lowestScore) {
-              lowestScore = scoreValue;
+            if (score.getDouble("score") < lowestScore.getDouble("score")) {
+              lowestScore = score;
             }
           }
         }
       } // for
-      System.out.println("lowest homework score " + lowestScore);
+      if (lowestScore == null) {
+        System.err.println("no lowest score found");
+      } else {
+        System.out.println("lowest homework score " + lowestScore.getDouble("score"));
+        if (scores.remove(lowestScore)) {
+          Integer studentId = student.getInteger("_id");
+//          if (students.updateOne(eq("_id", studentId), student).getModifiedCount() > 0) {
+//            System.out.println("updated score array for " + studentId);
+//          } else {
+//            System.err.println("could not update score array for " + studentObjectId);
+//          }
+          System.out.println("would set score array for " + studentId + " to:");
+          printJson(student);
+        } else {
+          System.err.println("could not remove lowest score found");
+        }
+      }
     }
 
     //after
@@ -71,14 +88,6 @@ public class Homework3_1 {
 
   private static boolean isHomework(Document score) {
     return score.getString("type").equals("homework");
-  }
-
-  private static void removeGradeEntry(MongoCollection<Document> grades, Document lastEntry) {
-    Document toRemove = grades.find(eq("_id", lastEntry.getObjectId("_id"))).first();
-    System.out.println("would remove: ");
-    printJson(toRemove, INDENT);
-//    Document removed = grades.findOneAndDelete(eq("_id", lastEntry.getObjectId("_id")));
-//    printJson(removed, INDENT);
   }
 
   private static boolean studentIdChanged(Document lastEntry, Document grade) {
