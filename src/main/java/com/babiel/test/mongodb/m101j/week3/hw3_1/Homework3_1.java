@@ -74,7 +74,7 @@ public class Homework3_1 {
           printJson(student);
 
           //update
-//          if (students.updateOne(eq("_id", studentId), student).getModifiedCount() > 0) {
+//          if (students.updateOne(eq("_id", studentId), new Document("$set", new Document("scores", scores))).getModifiedCount() > 0) {
 //            System.out.println("updated score array for " + studentId);
 //          } else {
 //            System.err.println("could not update score array for " + studentId);
