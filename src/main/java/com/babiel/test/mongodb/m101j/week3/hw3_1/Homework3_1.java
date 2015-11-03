@@ -68,13 +68,17 @@ public class Homework3_1 {
         System.out.println("lowest homework score " + lowestScore.getDouble("score"));
         if (scores.remove(lowestScore)) {
           Integer studentId = student.getInteger("_id");
+
+          //show
+          System.out.println("would set score array for " + studentId + " to:");
+          printJson(student);
+
+          //update
 //          if (students.updateOne(eq("_id", studentId), student).getModifiedCount() > 0) {
 //            System.out.println("updated score array for " + studentId);
 //          } else {
-//            System.err.println("could not update score array for " + studentObjectId);
+//            System.err.println("could not update score array for " + studentId);
 //          }
-          System.out.println("would set score array for " + studentId + " to:");
-          printJson(student);
         } else {
           System.err.println("could not remove lowest score found");
         }
