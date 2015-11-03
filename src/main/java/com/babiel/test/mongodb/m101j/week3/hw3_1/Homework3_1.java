@@ -42,13 +42,35 @@ public class Homework3_1 {
     //before
     System.out.println("school.students.count() before " + students.count());
 
+    List<Document> scores = Collections.emptyList();
     for (Document student : students.find()) {
       printJson(student, DONT_INDENT);
+      scores = (List<Document>) student.get("scores");
+
+      Double lowestScore = null;
+      for (Document score : scores) {
+        Double scoreValue = score.getDouble("score");
+        if (isHomework(score)) {
+          printJson(score, INDENT);
+          if (lowestScore == null) {
+            lowestScore = scoreValue;
+          } else {
+            if (scoreValue < lowestScore) {
+              lowestScore = scoreValue;
+            }
+          }
+        }
+      } // for
+      System.out.println("lowest homework score " + lowestScore);
     }
 
     //after
     System.out.println("students.grades.count() after " + students.count());
 
+  }
+
+  private static boolean isHomework(Document score) {
+    return score.getString("type").equals("homework");
   }
 
   private static void removeGradeEntry(MongoCollection<Document> grades, Document lastEntry) {
