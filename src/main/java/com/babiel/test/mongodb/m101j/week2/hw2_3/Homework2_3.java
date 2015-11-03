@@ -41,7 +41,7 @@ public class Homework2_3 {
     // As you notice that change of student_id, remove the document.
 
     //before
-    System.out.println("students.grades.count() " + grades.count());
+    System.out.println("students.grades.count() before " + grades.count());
 
     Bson filter = eq("type", "homework");
     Bson sort = and(ascending("student_id"), descending("score"));
@@ -52,18 +52,29 @@ public class Homework2_3 {
 
     System.out.println("homeworks.size " + homeworks.size());
 
-    Document lastEntry = new Document();
+    Document prevGradeEntry = new Document();
     for (Document grade : homeworks) {
       printJson(grade, DONT_INDENT);
 
-      if (studentIdChanged(lastEntry, grade)) {
-       //grades.deleteOne(eq("_id", lastEntry.getObjectId("_id")));
-        Document toRemove = grades.find(eq("_id", lastEntry.getObjectId("_id"))).first();
-        System.out.println("would remove: ");
-        printJson(toRemove, INDENT);
+      if (studentIdChanged(prevGradeEntry, grade)) {
+        removeGradeEntry(grades, prevGradeEntry);
+
       }
-      lastEntry = grade;
+      prevGradeEntry = grade;
     }
+    //last
+    removeGradeEntry(grades, prevGradeEntry);
+
+    //after
+    System.out.println("students.grades.count() after " + grades.count());
+
+  }
+
+  private static void removeGradeEntry(MongoCollection<Document> grades, Document lastEntry) {
+    //grades.deleteOne(eq("_id", lastEntry.getObjectId("_id")));
+    Document toRemove = grades.find(eq("_id", lastEntry.getObjectId("_id"))).first();
+    System.out.println("would remove: ");
+    printJson(toRemove, INDENT);
   }
 
   private static boolean studentIdChanged(Document lastEntry, Document grade) {
