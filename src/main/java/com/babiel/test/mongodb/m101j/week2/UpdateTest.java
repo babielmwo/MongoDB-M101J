@@ -10,6 +10,7 @@ import org.bson.conversions.Bson;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.babiel.test.mongodb.m101j.util.Helpers.Indent.INDENT;
 import static com.babiel.test.mongodb.m101j.util.Helpers.printJson;
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.gt;
@@ -40,7 +41,7 @@ public class UpdateTest {
     collection.updateMany(gte("_id", 5), new Document("$inc", new Document("x", 1)));
 
     for (Document cur : collection.find().into(new ArrayList<Document>())) {
-      printJson(cur, false);
+      printJson(cur, INDENT);
     }
   }
 }

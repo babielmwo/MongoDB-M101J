@@ -9,14 +9,18 @@ import org.bson.json.JsonWriterSettings;
 
 import java.io.StringWriter;
 
+import static com.babiel.test.mongodb.m101j.util.Helpers.Indent.INDENT;
+
 public class Helpers {
+  public enum Indent {DONT_INDENT, INDENT}
+
   public static void printJson(Document document) {
-    printJson(document, true);
+    printJson(document, INDENT);
   }
 
-  public static void printJson(Document document, boolean indent) {
+  public static void printJson(Document document, Indent indent) {
     JsonWriter jsonWriter = new JsonWriter(new StringWriter(),
-        new JsonWriterSettings(JsonMode.SHELL, indent));
+        new JsonWriterSettings(JsonMode.SHELL, indent == INDENT));
     new DocumentCodec().encode(jsonWriter, document,
         EncoderContext.builder()
             .isEncodingCollectibleDocument(true)

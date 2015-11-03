@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static com.babiel.test.mongodb.m101j.util.Helpers.Indent.INDENT;
 import static com.babiel.test.mongodb.m101j.util.Helpers.printJson;
 import static com.mongodb.client.model.Filters.*;
 import static com.mongodb.client.model.Projections.*;
@@ -43,7 +44,7 @@ public class FindWithSortSkipLimitTest {
         .into(new ArrayList<Document>());
 
     for (Document cur : all) {
-      printJson(cur, false);
+      printJson(cur, INDENT);
     }
   }
 }
