@@ -71,10 +71,11 @@ public class Homework2_3 {
   }
 
   private static void removeGradeEntry(MongoCollection<Document> grades, Document lastEntry) {
-    //grades.deleteOne(eq("_id", lastEntry.getObjectId("_id")));
     Document toRemove = grades.find(eq("_id", lastEntry.getObjectId("_id"))).first();
     System.out.println("would remove: ");
     printJson(toRemove, INDENT);
+//    Document removed = grades.findOneAndDelete(eq("_id", lastEntry.getObjectId("_id")));
+//    printJson(removed, INDENT);
   }
 
   private static boolean studentIdChanged(Document lastEntry, Document grade) {
